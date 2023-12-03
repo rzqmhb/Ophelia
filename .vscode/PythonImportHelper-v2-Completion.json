@@ -1,0 +1,54 @@
+[
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "Ophelia.app",
+        "description": "Ophelia.app",
+        "peekOfCode": "def main():\n    return render_template('index.html')\n@app.route(\"/teori\")\ndef teori():\n    return render_template('teori.html')\n@app.route(\"/tentang\")\ndef tentang():\n    return render_template('tentang.html')\nif __name__ == \"__main__\":\n    app.run(debug=True)",
+        "detail": "Ophelia.app",
+        "documentation": {}
+    },
+    {
+        "label": "teori",
+        "kind": 2,
+        "importPath": "Ophelia.app",
+        "description": "Ophelia.app",
+        "peekOfCode": "def teori():\n    return render_template('teori.html')\n@app.route(\"/tentang\")\ndef tentang():\n    return render_template('tentang.html')\nif __name__ == \"__main__\":\n    app.run(debug=True)",
+        "detail": "Ophelia.app",
+        "documentation": {}
+    },
+    {
+        "label": "tentang",
+        "kind": 2,
+        "importPath": "Ophelia.app",
+        "description": "Ophelia.app",
+        "peekOfCode": "def tentang():\n    return render_template('tentang.html')\nif __name__ == \"__main__\":\n    app.run(debug=True)",
+        "detail": "Ophelia.app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "Ophelia.app",
+        "description": "Ophelia.app",
+        "peekOfCode": "app = Flask(__name__)\n@app.route(\"/\")\ndef main():\n    return render_template('index.html')\n@app.route(\"/teori\")\ndef teori():\n    return render_template('teori.html')\n@app.route(\"/tentang\")\ndef tentang():\n    return render_template('tentang.html')",
+        "detail": "Ophelia.app",
+        "documentation": {}
+    }
+]
