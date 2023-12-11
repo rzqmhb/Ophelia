@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ophelia : Kalkulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function drawTable() {
+            document.getElementById('alternatif').value = document.getElementById('baris').value
+            document.getElementById('kriteria').value = document.getElementById('kolom').value
+            var rows = +document.getElementById('baris').value + 2;
+            var cols = document.getElementById('kolom').value;
+            var table = document.getElementById('tabel');
+            table.innerHTML = '';
+            
+            for (var i = 0; i <= rows; i++) {
+                var row = document.createElement('tr');
+                for (var j = 0; j <= cols; j++) {
+                    if ((i === 0 || i === 1 || i === 2) && (j === 0)) {
+                        var cell = document.createElement('th');
+                        cell.textContent = '';
+                        row.appendChild(cell);
+                        continue;
+                    }
+                    if (i === 0) {
+                        var cell = document.createElement('td');
+                        var input = document.createElement('select');
+                        input.id = 'jenis';
+                        input.name = 'jenis[]';
+                        input.classList = 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500';
+                        var option1 = document.createElement('option');
+                        option1.textContent = 'Benefit';
+                        var option2 = document.createElement('option');
+                        option2.textContent = 'Cost';
+                        input.append(option1);
+                        input.append(option2);
+                        cell.appendChild(input);
+                        row.appendChild(cell);
+                        continue
+                    }
+                    if (i === 1) {
+                        var cell = document.createElement('td');
+                        var input = document.createElement('input');
+                        input.type = 'text';
+                        input.name = 'bobot[]';
+                        input.required = true;
+                        input.setAttribute('placeholder', 'bobot');
+                        input.classList = 'w-20 ml-1 mt-4 mb-4 text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500';
+                        cell.appendChild(input);
+                        row.appendChild(cell);
+                        continue
+                    }
+                    if (i === 2) {
+                        var cell = document.createElement('th');
+                        header = 'C'+j;
+                        cell.textContent = header;
+                        cell.classList = 'text-center'
+                        row.appendChild(cell);
+                        continue
+                    }
+                    if (j === 0) {
+                        var cell = document.createElement('th');
+                        header = 'A'+(+i-2);
+                        cell.textContent = header;
+                        cell.classList = 'py-2 px-4'
+                        row.appendChild(cell);
+                        continue
+                    }
+                    var cell = document.createElement('td');
+                    var input = document.createElement('input');
+                    input.type = 'text';
+                    input.name = 'input['+(+i-2)+'][]';
+                    input.classList = 'w-10 bg-gray-50 ml-6 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500';
+                    cell.appendChild(input);
+                    row.appendChild(cell);
+                }
+                table.appendChild(row);
+            }
+
+            document.getElementById('manipulasi').style.display = 'flex';
+        }
+        </script>
+</head>
+<body class="h-max bg-slate-50 flex flex-col">
+    <nav class="sticky top-0 bg-white  grid grid-cols-5 h-16">
+        <div class="grid justify-center items-center">
+            <a href="/">
+                <img src="{{ url_for('static', filename='assets/ophelia.svg') }}" alt="logo" style="height: 25px;">
+            </a>
+        </div>
+        <div class="col-span-3 flex flex-row items-center justify-center space-x-20">
+            <a href="/teori" class="hover:font-medium hover:underline hover:underline-offset-8">Teori</a>
+            <a href="/" class="hover:font-medium hover:underline hover:underline-offset-8">Home</a>
+            <a href="/kalkulator" class="underline underline-offset-8 font-semibold">Kalkulator</a>
+        </div>
+    </nav>
+    <div class="mt-10 w-11/12 self-center flex flex-col">
+        <strong class="text-4xl self-center">Kalkulator CPI</strong>
+        <div class="self-center bg-white rounded-md mt-16 w-full px-8 py-5 flex flex-col">
+            {% if(data is defined) %}
+            <ul>
+                <li class="flex flex-col">
+                    <p class="mt-8 mb-8 text-base font-medium">A. Hasil Perhitungan</p>
+                    <table class="self-center border-collapse border border-gray-600">
+                        <tr class="bg-slate-300">
+                            <th></th>
+                            <th class="border border-gray-600 px-3.5 py-1">Jumlah Skor</th>
+                            <th class="border border-gray-600 px-3.5 py-1">Ranking</th>
+                        </tr>
+                        {% for i in range(data.alternatif) %}
+                            <tr>
+                                <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A{{ i+1 }}</th>
+                                <td class="border border-gray-600 px-3.5 py-1 text-center">{{ data.data_terjumlah[i] }}</td>
+                                <td class="border border-gray-600 px-3.5 py-1 text-center">{{ data.data_ranking[i] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </li>
+                <li class="flex flex-col">
+                    <p class="mt-8 mb-8 text-base font-medium">B. Matriks Perbandingan</p>
+                    <table class="self-center border-collapse border border-gray-600">
+                        <tr class="bg-slate-300">
+                            <th></th>
+                            {% for i in range(data.kriteria) %}
+                                <th class="border border-gray-600 px-3.5 py-1">C{{ i+1 }}</th>
+                            {% endfor %}
+                        </tr>
+                        <tr class="bg-slate-300">
+                            <th></th>
+                            {% for i in range(data.kriteria) %}
+                                <th class="border border-gray-600 px-3.5 py-1">{{ data.jenis[i] }}</th>
+                            {% endfor %}
+                        </tr>
+                        <tr class="bg-slate-300">
+                            <th></th>
+                            {% for i in range(data.kriteria) %}
+                                <th class="border border-gray-600 px-3.5 py-1">{{ data.bobot[i] }}</th>
+                            {% endfor %}
+                        </tr>
+                        {% for i in range(data.alternatif) %}
+                            <tr>
+                                <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A{{ i+1 }}</th>
+                                {% for j in range(data.kriteria) %}
+                                    <td class="border border-gray-600 px-3.5 py-1 text-center">{{ data.matrix[i][j] }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </li>
+                <li class="flex flex-col">
+                    <p class="mt-8 mb-8 text-base font-medium">C. Matriks Tertransformasi</p>
+                    <table class="self-center border-collapse border border-gray-600">
+                        <tr class="bg-slate-300">
+                            <th></th>
+                            {% for i in range(data.kriteria) %}
+                                <th class="border border-gray-600 px-3.5 py-1">C{{ i+1 }}</th>
+                            {% endfor %}
+                        </tr>
+                        {% for i in range(data.alternatif) %}
+                            <tr>
+                                <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A{{ i+1 }}</th>
+                                {% for j in range(data.kriteria) %}
+                                    <td class="border border-gray-600 px-3.5 py-1 text-center">{{ data.data_tertransformasi[i][j] }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </li>
+                <li class="flex flex-col">
+                    <p class="mt-8 mb-8 text-base font-medium">D. Matriks Terbobot</p>
+                    <table class="self-center border-collapse border border-gray-600">
+                        <tr class="bg-slate-300">
+                            <th></th>
+                            {% for i in range(data.kriteria) %}
+                                <th class="border border-gray-600 px-3.5 py-1">C{{ i+1 }}</th>
+                            {% endfor %}
+                        </tr>
+                        {% for i in range(data.alternatif) %}
+                            <tr>
+                                <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A{{ i+1 }}</th>
+                                {% for j in range(data.kriteria) %}
+                                    <td class="border border-gray-600 px-3.5 py-1 text-center">{{ data.data_terbobot[i][j] }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </li>
+            </ul>
+            {% endif %}
+            <p class="font-medium text-lg">Buat Tabel Data</p>
+            <div class="mt-4 pl-8 flex w-full">
+                <div class="w-1/5">
+                    <label for="baris" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Alternatif</label>
+                    <input type="number" min="1" id="baris" name="baris" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="alternatif" required>
+                </div>
+                <div class="w-1/5">
+                    <label for="kolom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Kriteria</label>
+                    <input type="number" min="1" id="kolom" name="kolom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="kriteria" required>
+                </div>
+                <div class="w-1/5 flex flex-col self-end">
+                    <button onclick="drawTable()" type="button" class="self-center text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Buat Tabel</button>
+                </div>
+            </div>
+            <div id="manipulasi" class="flex flex-col w-full mt-4 mb-4" style="display: none;">
+                <p class="font-medium text-lg mb-6">Input Data</p>
+                <div class="mb-2">
+                    <button onclick="document.getElementById('form').submit()" type="button" class="self-center text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Input</button>
+                </div>
+                <form action="/kalkulator/submit" id="form" method="post" class="pl-8">
+                    <input type="hidden" name="alternatif" id="alternatif">
+                    <input type="hidden" name="kriteria" id="kriteria">
+                    <table id="tabel" class="overflow-hidden table-auto"></table>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

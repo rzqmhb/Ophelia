@@ -16,11 +16,91 @@
         "documentation": {}
     },
     {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "transformasiBenefit",
+        "kind": 2,
+        "importPath": "Ophelia.app",
+        "description": "Ophelia.app",
+        "peekOfCode": "def transformasiBenefit(data):\n    for i in range(len(data)):\n        min = np.min(data[i])\n        data[i] = (data[i]/min) * 100\n    return data\ndef transformasiCost(data):\n    for i in range(len(data)):\n        min = np.min(data[i])\n        data[i] = (min/data[i]) * 100\n    return data",
+        "detail": "Ophelia.app",
+        "documentation": {}
+    },
+    {
+        "label": "transformasiCost",
+        "kind": 2,
+        "importPath": "Ophelia.app",
+        "description": "Ophelia.app",
+        "peekOfCode": "def transformasiCost(data):\n    for i in range(len(data)):\n        min = np.min(data[i])\n        data[i] = (min/data[i]) * 100\n    return data\ndef pembobotan(data, weight = np.array([0.25,0.15,0.1,0.1,0.1,0.1,0.05,0.05,0.05,0.05])):\n    weighted = []\n    for i in data:\n        weighted.append(np.round((i*weight), 4))\n    return np.array(weighted).T",
+        "detail": "Ophelia.app",
+        "documentation": {}
+    },
+    {
+        "label": "pembobotan",
+        "kind": 2,
+        "importPath": "Ophelia.app",
+        "description": "Ophelia.app",
+        "peekOfCode": "def pembobotan(data, weight = np.array([0.25,0.15,0.1,0.1,0.1,0.1,0.05,0.05,0.05,0.05])):\n    weighted = []\n    for i in data:\n        weighted.append(np.round((i*weight), 4))\n    return np.array(weighted).T\ndef penjumlahan(data):\n    terjumlah = []\n    for i in data:\n        terjumlah.append(np.round(np.sum(i), 4))\n    return np.array(terjumlah)",
+        "detail": "Ophelia.app",
+        "documentation": {}
+    },
+    {
+        "label": "penjumlahan",
+        "kind": 2,
+        "importPath": "Ophelia.app",
+        "description": "Ophelia.app",
+        "peekOfCode": "def penjumlahan(data):\n    terjumlah = []\n    for i in data:\n        terjumlah.append(np.round(np.sum(i), 4))\n    return np.array(terjumlah)\ndef perankingan(data):\n    teranking = np.argsort((np.argsort(-data)))+1\n    return teranking\ndefault_data = [\n        np.array([4,3,5,5,1,1,4,1,4,2]),",
+        "detail": "Ophelia.app",
+        "documentation": {}
+    },
+    {
+        "label": "perankingan",
+        "kind": 2,
+        "importPath": "Ophelia.app",
+        "description": "Ophelia.app",
+        "peekOfCode": "def perankingan(data):\n    teranking = np.argsort((np.argsort(-data)))+1\n    return teranking\ndefault_data = [\n        np.array([4,3,5,5,1,1,4,1,4,2]),\n        np.array([4,3,1,1,3,1,1,1,1,2]),\n        np.array([4,4,5,5,3,1,1,1,4,1]),\n        np.array([4,2,1,1,2,1,4,1,4,2]),\n        np.array([4,3,5,5,3,2,4,1,1,2]),\n        np.array([4,4,1,1,5,1,4,1,4,2]),",
+        "detail": "Ophelia.app",
+        "documentation": {}
+    },
+    {
         "label": "main",
         "kind": 2,
         "importPath": "Ophelia.app",
         "description": "Ophelia.app",
-        "peekOfCode": "def main():\n    return render_template('index.html')\n@app.route(\"/teori\")\ndef teori():\n    return render_template('teori.html')\n@app.route(\"/tentang\")\ndef tentang():\n    return render_template('tentang.html')\nif __name__ == \"__main__\":\n    app.run(debug=True)",
+        "peekOfCode": "def main():\n    data = np.array(default_data)\n    data_perKriteria = data.copy().T\n    data_perKriteria[0:4] = transformasiBenefit(data_perKriteria[0:4])\n    data_perKriteria[4:10] = transformasiCost(data_perKriteria[4:10])\n    data_terbobot = pembobotan(data_perKriteria.T)\n    data_terjumlah = penjumlahan(data_terbobot.T)\n    data_ranking = perankingan(data_terjumlah)\n    map = {\n        \"default\" : data,",
+        "detail": "Ophelia.app",
+        "documentation": {}
+    },
+    {
+        "label": "cpi",
+        "kind": 2,
+        "importPath": "Ophelia.app",
+        "description": "Ophelia.app",
+        "peekOfCode": "def cpi():\n    default = np.array(default_data)\n    data_perAlternatif = np.array([\n        np.array([int(x) for x in request.form.getlist(f'A{i+1}[]')]) for i in range(20)\n    ])\n    data_perKriteria = data_perAlternatif.copy().T\n    data_perKriteria[0:4] = transformasiBenefit(data_perKriteria[0:4])\n    data_perKriteria[4:10] = transformasiCost(data_perKriteria[4:10])\n    data_terbobot = pembobotan(data_perKriteria.T)\n    data_terjumlah = penjumlahan(data_terbobot.T)",
+        "detail": "Ophelia.app",
+        "documentation": {}
+    },
+    {
+        "label": "kalkulatorSubmit",
+        "kind": 2,
+        "importPath": "Ophelia.app",
+        "description": "Ophelia.app",
+        "peekOfCode": "def kalkulatorSubmit():\n    data_perAlternatif = np.array([\n        np.array([int(x) for x in request.form.getlist(f'input[{i+1}][]')]) for i in range(int(request.form.get('alternatif')))\n    ])\n    jenis = np.array(request.form.getlist('jenis[]'))\n    bobot = np.array(request.form.getlist('bobot[]'))\n    bobot = np.array([float(x) for x in bobot])\n    data_perKriteria = data_perAlternatif.copy().T\n    benefit = []\n    cost = []",
         "detail": "Ophelia.app",
         "documentation": {}
     },
@@ -29,16 +109,16 @@
         "kind": 2,
         "importPath": "Ophelia.app",
         "description": "Ophelia.app",
-        "peekOfCode": "def teori():\n    return render_template('teori.html')\n@app.route(\"/tentang\")\ndef tentang():\n    return render_template('tentang.html')\nif __name__ == \"__main__\":\n    app.run(debug=True)",
+        "peekOfCode": "def teori():\n    return render_template('teori.html')\n@app.route(\"/kalkulator\")\ndef kalkulator():\n    return render_template('kalkulator.html')\nif __name__ == \"__main__\":\n    app.run(debug=True)",
         "detail": "Ophelia.app",
         "documentation": {}
     },
     {
-        "label": "tentang",
+        "label": "kalkulator",
         "kind": 2,
         "importPath": "Ophelia.app",
         "description": "Ophelia.app",
-        "peekOfCode": "def tentang():\n    return render_template('tentang.html')\nif __name__ == \"__main__\":\n    app.run(debug=True)",
+        "peekOfCode": "def kalkulator():\n    return render_template('kalkulator.html')\nif __name__ == \"__main__\":\n    app.run(debug=True)",
         "detail": "Ophelia.app",
         "documentation": {}
     },
@@ -47,7 +127,16 @@
         "kind": 5,
         "importPath": "Ophelia.app",
         "description": "Ophelia.app",
-        "peekOfCode": "app = Flask(__name__)\n@app.route(\"/\")\ndef main():\n    return render_template('index.html')\n@app.route(\"/teori\")\ndef teori():\n    return render_template('teori.html')\n@app.route(\"/tentang\")\ndef tentang():\n    return render_template('tentang.html')",
+        "peekOfCode": "app = Flask(__name__)\ndef transformasiBenefit(data):\n    for i in range(len(data)):\n        min = np.min(data[i])\n        data[i] = (data[i]/min) * 100\n    return data\ndef transformasiCost(data):\n    for i in range(len(data)):\n        min = np.min(data[i])\n        data[i] = (min/data[i]) * 100",
+        "detail": "Ophelia.app",
+        "documentation": {}
+    },
+    {
+        "label": "default_data",
+        "kind": 5,
+        "importPath": "Ophelia.app",
+        "description": "Ophelia.app",
+        "peekOfCode": "default_data = [\n        np.array([4,3,5,5,1,1,4,1,4,2]),\n        np.array([4,3,1,1,3,1,1,1,1,2]),\n        np.array([4,4,5,5,3,1,1,1,4,1]),\n        np.array([4,2,1,1,2,1,4,1,4,2]),\n        np.array([4,3,5,5,3,2,4,1,1,2]),\n        np.array([4,4,1,1,5,1,4,1,4,2]),\n        np.array([4,3,1,1,1,1,4,1,2,2]),\n        np.array([3,3,5,5,5,1,3,1,3,3]),\n        np.array([4,3,1,5,3,1,4,1,4,2]),",
         "detail": "Ophelia.app",
         "documentation": {}
     }

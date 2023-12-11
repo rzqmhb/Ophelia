@@ -6,27 +6,486 @@
     <title>Ophelia</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="h-max">
-    <nav class="sticky pt-10 grid grid-cols-5 h-16">
+<body class="h-max bg-slate-50 flex flex-col">
+    <nav class="sticky top-0 bg-white  grid grid-cols-5 h-16">
         <div class="grid justify-center items-center">
             <a href="/">
-                <img src="{{ url_for('static', filename='assets/ophelia.svg') }}" alt="logo" style="height: 30px;">
+                <img src="{{ url_for('static', filename='assets/ophelia.svg') }}" alt="logo" style="height: 25px;">
             </a>
         </div>
         <div class="col-span-3 flex flex-row items-center justify-center space-x-20">
-            <a href="/teori" class="">Teori</a>
-            <a href="/" class="underline underline-offset-4">Home</a>
-            <a href="/tentang" class="">Tentang</a>
+            <a href="/teori" class="hover:font-medium hover:underline hover:underline-offset-8">Teori</a>
+            <a href="/" class="underline underline-offset-8 font-semibold">Home</a>
+            <a href="/kalkulator" class="hover:font-medium hover:underline hover:underline-offset-8">Kalkulator</a>
         </div>
     </nav>
-    <div class="mt-10 grid grid-cols-2">
-        <div class="sticky top-0 grid grid-flow-row">
-            <h4>Data  dari Artikel</h4>
-        </div>
-        <div>
-            simulasi CPI
+    <div class="self-center flex flex-col mt-16">
+        <strong class="text-7xl self-center">Ophelia</strong>
+        <p class="text-center mt-20 w-11/12 self-center text-lg"> 
+            &emsp;&emsp;&emsp;&emsp;&emsp;Ophelia merupakan aplikasi berbasis website yang digunakan untuk melakukan simulasi perhitungan 
+            salah satu metode Sistem Pendukung Keputusan, yaitu Composite Performance Index(CPI). Secara <i>default</i>, aplikasi akan
+            melakukan perhitungan metode CPI pada data yang didapatkan dari <a href="#data" class="underline">Artikel Studi Kasus</a> yang
+            menggunakan metode SPK yang berbeda, yang hasilnya akan digunakan sebagai <a href="#perbandingan" class="underline">pembanding</a> 
+            bagi hasil hitung metode CPI. Namun, data-data <i>default</i> tadi nantinya akan bisa dimanipulasi untuk mendapatkan hasil yang 
+            berbeda. Pada aplikasi ini juga tersedia fitur kalkulator yang dapat digunakan untuk menghitung metode CPI dengan data yang lebih dinamis.
+        </p>
+    </div>
+    <p id="data"></p>
+    <div class="mt-60 w-full flex flex-col">
+        <strong class="text-4xl self-center">Studi Kasus</strong>
+        <hr class="w-4/6 h-0.5 self-center my-8 bg-gray-700 border-0 rounded">
+        <hr class="w-1/6 h-0.5 self-center -mt-4 my-8 bg-gray-700 border-0 rounded">
+        <div class="mt-6 grid grid-cols-6 w-11/12 self-center">
+            <div class="col-span-2">
+                <p class="font-medium mb-4">Alternatif :</p>
+                <table class="table-fixed">
+                    <thead>
+                        <tr class="bg-slate-300">
+                            <th class="px-3 py-2 border border-gray-700">Inisial Nama<br>Mahasiswa</th>
+                            <th class="px-3 py-2 border border-gray-700">Kode <br> Alternatif</th>
+                            <th class="px-3 py-2 border border-gray-700">Status <br> Mahasiswa</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr>
+                            <td>AM</td>
+                            <td>A1</td>
+                            <td>Penerima</td>
+                        </tr>
+                        <tr>
+                            <td>SM</td>
+                            <td>A2</td>
+                            <td>Penerima</td>
+                        </tr>
+                        <tr>
+                            <td>SL</td>
+                            <td>A3</td>
+                            <td>Penerima</td>
+                        </tr>
+                        <tr>
+                            <td>SA</td>
+                            <td>A4</td>
+                            <td>Penerima</td>
+                        </tr>
+                        <tr>
+                            <td>TY</td>
+                            <td>A5</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                        <tr>
+                            <td>NA</td>
+                            <td>A6</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                        <tr>
+                            <td>SW</td>
+                            <td>A7</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                        <tr>
+                            <td>VA</td>
+                            <td>A8</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                        <tr>
+                            <td>AF</td>
+                            <td>A9</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                        <tr>
+                            <td>AS</td>
+                            <td>A10</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                        <tr>
+                            <td>SZ</td>
+                            <td>A11</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                        <tr>
+                            <td>AK</td>
+                            <td>A12</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                        <tr>
+                            <td>AP</td>
+                            <td>A13</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                        <tr>
+                            <td>AA</td>
+                            <td>A14</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                        <tr>
+                            <td>TF</td>
+                            <td>A15</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                        <tr>
+                            <td>MR</td>
+                            <td>A16</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                        <tr>
+                            <td>DP</td>
+                            <td>A17</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                        <tr>
+                            <td>RD</td>
+                            <td>A18</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                        <tr>
+                            <td>DN</td>
+                            <td>A19</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                        <tr>
+                            <td>RM</td>
+                            <td>A20</td>
+                            <td>Pendaftar</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-span-4">
+                <p class="text-left text-lg">
+                    Artikel yang digunakan sebagai studi kasus dalam aplikasi ini adalah artikel yang berjudul 
+                    <a class="underline" href="https://drive.google.com/file/d/1knK18yP6zjEwwLew0Rkl4Qfl5jjE6Axf/view">"Penerapan Metode 
+                    SAW Pada Penentuan Penerima Beasiswa Lazizmu" </a>. Dari artikel tersebut, didapatkan data-data yang dibutuhkan untuk 
+                    penghitungan metode CPI berupa alternatif, Kriteria beserta bobotnya, dan Matriks Perbandingan. 
+                </p>
+                <p class="font-medium mt-16 mb-4">Kriteria :</p>
+                <table class="table-auto">
+                    <thead>
+                        <tr class="bg-slate-300">
+                            <th class="px-3 py-2 border border-gray-700">Kode Kriteria</th>
+                            <th class="px-3 py-2 border border-gray-700">Kriteria</th>
+                            <th class="px-3 py-2 border border-gray-700">Jenis Kriteria</th>
+                            <th class="px-3 py-2 border border-gray-700">Bobot Kriteria</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr>
+                            <td>C1</td>
+                            <td>Hasil Wawancara</td>
+                            <td>Benefit</td>
+                            <td>0.25</td>
+                        </tr>
+                        <tr>
+                            <td>C2</td>
+                            <td>IPK</td>
+                            <td>Benefit</td>
+                            <td>0.5</td>
+                        </tr>
+                        <tr>
+                            <td>C3</td>
+                            <td>Kepemilikan KIP</td>
+                            <td>Benefit</td>
+                            <td>0.1</td>
+                        </tr>
+                        <tr>
+                            <td>C4</td>
+                            <td>Kepemilikan KKS</td>
+                            <td>Benefit</td>
+                            <td>0.1</td>
+                        </tr>
+                        <tr>
+                            <td>C5</td>
+                            <td>Penghasilan Ayah</td>
+                            <td>Cost</td>
+                            <td>0.1</td>
+                        </tr>
+                        <tr>
+                            <td>C6</td>
+                            <td>Penghasilan Ibu</td>
+                            <td>Cost</td>
+                            <td>0.1</td>
+                        </tr>
+                        <tr>
+                            <td>C7</td>
+                            <td>Kepemilikan Rumah</td>
+                            <td>Cost</td>
+                            <td>0.05</td>
+                        </tr>
+                        <tr>
+                            <td>C8</td>
+                            <td>Daya Listrik</td>
+                            <td>Cost</td>
+                            <td>0.05</td>
+                        </tr>
+                        <tr>
+                            <td>C9</td>
+                            <td>Luas Tanah</td>
+                            <td>Cost</td>
+                            <td>0.05</td>
+                        </tr>
+                        <tr>
+                            <td>C10</td>
+                            <td>Sumber Air</td>
+                            <td>Cost</td>
+                            <td>0.05</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <footer></footer>
+    <p id="perbandingan"></p>
+    <div class="mt-60 w-full flex flex-col">
+        <strong class="text-4xl self-center">Perbandingan Hasil Perhitungan</strong>
+        <hr class="w-4/6 h-0.5 self-center my-8 bg-gray-700 border-0 rounded">
+        <hr class="w-1/6 h-0.5 self-center -mt-4 my-8 bg-gray-700 border-0 rounded">
+    </div>
+    <div class="mt-6 grid grid-cols-2">
+        <div class="">
+            <p class="text-center font-semibold text-lg">Perhitungan Data pada Artikel Contoh Kasus Menggunakan Metode SAW</p>
+            <ul class="ml-8">
+                <li class="flex flex-col">
+                    <p class="mt-8 mb-8 text-base font-medium">A. Hasil Perhitungan</p>
+                    <table class="self-center border-collapse border border-gray-600">
+                        <tr class="bg-slate-300">
+                            <th></th>
+                            <th class="border border-gray-600 px-3.5 py-1">Total Skor</th>
+                            <th class="border border-gray-600 px-3.5 py-1">Ranking</th>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A1</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.90000</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">2</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A2</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.70830</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">5</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A3</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">2.09580</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A4</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.32500</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">16</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A5</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.79580</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">4</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A6</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.35000</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">14</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A7</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.56250</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">8</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A8</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.63750</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">7</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A9</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.53330</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">10</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A10</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.56250</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">9</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A11</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.51250</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">12</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A12</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.70420</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">6</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A13</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.30420</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">17</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A14</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.86250</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">3</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A15</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.18750</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">19</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A16</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.51670</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">11</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A17</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.32920</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">15</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A18</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.25830</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">18</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A19</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.48750</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">13</td>
+                        </tr>   
+                        <tr>
+                            <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A20</th>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">1.18330</td>
+                            <td class="border border-gray-600 px-3.5 py-1 text-center">20</td>
+                        </tr>   
+                    </table>
+                </li>
+                <li class="flex flex-col">
+                    <p class="mt-8 mb-8 text-base font-medium">B. Matriks Perbandingan</p>
+                    <table class="self-center border-collapse border border-gray-600">
+                        <tr class="bg-slate-300">
+                            <th></th>
+                            {% for i in range(10) %}
+                                <th class="border border-gray-600 px-3.5 py-1">C{{ i+1 }}</th>
+                            {% endfor %}
+                        </tr>
+                        {% for i in range(20) %}
+                            <tr>
+                                <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A{{ i+1 }}</th>
+                                {% for j in range(10) %}
+                                    <td class="border border-gray-600 px-3.5 py-1 text-center">{{ data.default[i][j] }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </li>
+            </ul>
+        </div>
+        <div class=" flex flex-col">
+            <p class="text-center font-semibold text-lg">Simulasi Perhitungan Data dengan Metode CPI</p>
+            <ul>
+                <li class="flex flex-col">
+                    <p class="mt-8 mb-8 text-base font-medium">A. Hasil Perhitungan</p>
+                    <table class="self-center border-collapse border border-gray-600">
+                        <tr class="bg-slate-300">
+                            <th></th>
+                            <th class="border border-gray-600 px-3.5 py-1">Jumlah Skor</th>
+                            <th class="border border-gray-600 px-3.5 py-1">Ranking</th>
+                        </tr>
+                        {% for i in range(20) %}
+                            <tr>
+                                <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A{{ i+1 }}</th>
+                                <td class="border border-gray-600 px-3.5 py-1 text-center">{{ data.data_terjumlah[i] }}</td>
+                                <td class="border border-gray-600 px-3.5 py-1 text-center">{{ data.data_ranking[i] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </li>
+                <li class="flex flex-col">
+                    <p class="mt-8 mb-8 text-base font-medium">B. Matriks Perbandingan</p>
+                    <table class="self-center border-collapse border border-gray-600">
+                        <tr class="bg-slate-300">
+                            <th></th>
+                            {% for i in range(10) %}
+                                <th class="border border-gray-600 px-3.5 py-1">C{{ i+1 }}</th>
+                            {% endfor %}
+                        </tr>
+                        {% for i in range(20) %}
+                            <tr>
+                                <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A{{ i+1 }}</th>
+                                {% for j in range(10) %}
+                                    <td class="border border-gray-600 px-3.5 py-1 text-center">{{ data.matrix[i][j] }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </li>
+                <li class="flex flex-col">
+                    <p class="mt-8 mb-8 text-base font-medium">C. Matriks Tertransformasi</p>
+                    <table class="self-center border-collapse border border-gray-600">
+                        <tr class="bg-slate-300">
+                            <th></th>
+                            {% for i in range(10) %}
+                                <th class="border border-gray-600 px-3.5 py-1">C{{ i+1 }}</th>
+                            {% endfor %}
+                        </tr>
+                        {% for i in range(20) %}
+                            <tr>
+                                <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A{{ i+1 }}</th>
+                                {% for j in range(10) %}
+                                    <td class="border border-gray-600 px-3.5 py-1 text-center">{{ data.data_tertransformasi[i][j] }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </li>
+                <li class="flex flex-col">
+                    <p class="mt-8 mb-8 text-base font-medium">D. Matriks Terbobot</p>
+                    <table class="self-center border-collapse border border-gray-600">
+                        <tr class="bg-slate-300">
+                            <th></th>
+                            {% for i in range(10) %}
+                                <th class="border border-gray-600 px-3.5 py-1">C{{ i+1 }}</th>
+                            {% endfor %}
+                        </tr>
+                        {% for i in range(20) %}
+                            <tr>
+                                <th scope="row" class="border border-gray-600 bg-slate-300 px-3.5 py-1">A{{ i+1 }}</th>
+                                {% for j in range(10) %}
+                                    <td class="border border-gray-600 px-3.5 py-1 text-center">{{ data.data_terbobot[i][j] }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </li>
+            </ul>
+            <p class="mt-8 mb-8 text-base font-medium">Modifikasi Matriks Perbandingan</p>
+            <form id="matriks" action="/cpi" method="post" class="mt-2 flex flex-col">
+                <table class="table-auto w-10/12 mr-14 self-center">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            {% for i in range(10) %}
+                            <th>C{{ i+1 }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in range(20) %}
+                            <tr>
+                                <th scope="row" class="px-6 py-1 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    A{{ i+1 }}
+                                </th>
+                                {% for j in range(10) %}
+                                    <td>
+                                        <input type="text" name="A{{ i+1 }}[]" value="{{ data.matrix[i][j] }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+            <div class="self-end justify-between mr-24">
+                <a href="/"><button class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 mt-2">Reset</button></a>
+                <button></button>
+                <button type="submit" onclick="document.getElementById('matriks').submit()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-4">Submit</button>
+            </div>
+        </div>
+    </div>
+    <footer class="h-20"></footer>
 </body>
 </html>
